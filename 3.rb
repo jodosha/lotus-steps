@@ -5,7 +5,7 @@ class Show
   include Lotus::Action
 
   def call(params)
-    self.body = "Hello, Ruby Conf #{ params[:country].upcase }!"
+    self.body = "Hello, RubyConf #{ params[:country].upcase }!"
   end
 end
 
@@ -14,4 +14,7 @@ run Lotus::Router.new {
 }
 
 # GET /confs/pt
-# 200 "Hello, Ruby Conf PT!"
+# 200 "Hello, RubyConf PT!"
+
+# GET /confs/in
+# 200 "Hello, RubyConf IN!"

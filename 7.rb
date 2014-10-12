@@ -3,8 +3,6 @@ require 'lotus'
 module RubyConf
   class Application < Lotus::Application
     configure do
-      model.adapter :local, ENV['DATABASE_URL']
-
       routes    'config/routes'
       mapping   'config/mapping'
       templates 'app/templates'
@@ -17,7 +15,7 @@ end
 run RubyConf::Application.new
 
 # GET (text) /confs/pt
-# 200 "Hello, Ruby Conf PT!"
+# 200 "Olá, RubyConf PT!"
 #
 # GET (html) /confs/pt
-# 200 "<h1>Hello, Ruby Conf PT!</h1>"
+# 200 "<h1>Olá, RubyConf PT!</h1>"

@@ -11,16 +11,15 @@ module RubyConf
 
       templates 'app/templates'
 
-      model.adapter :local, "postgres://localhost/conferences_#{ environment }"
-
       mapping do
         collection :conferences do
           entity     Conference
           repository ConferenceRepository
 
           attribute :id,      Integer
-          attribute :country, String
+          attribute :country, String, as: :country_code
           attribute :name,    String
+          attribute :locale,  String
         end
       end
     end
@@ -28,6 +27,8 @@ module RubyConf
     load!
 
     module Controllers::Conferences # this is a controller
+      # Full name of this action:
+      #   RubyConf::Controllers::Conferences::Show
       class Show
         include RubyConf::Action
         expose :conference
@@ -39,19 +40,26 @@ module RubyConf
     end
 
     module Views::Conferences
+      # Full name of this view:
+      #   RubyConf::Views::Conferences::Show
+      #
       # This will render
       #   app/templates/conferences/show.html.erb
       #
-      #   <h1>Hello, <%= conference.name %>!</h1>
+      #   <h1><%= greeting %>, <%= conference.name %>!</h1>
       class Show
-        include RubyConf::Action
+        include RubyConf::View
+
+        def greeting
+          I18n.t('greeting', locale: conference.locale)
+        end
       end
 
       class TextShow < Show
         format :text
 
         def render
-          "Hello, #{ conference.name }!"
+          "#{ greeting }, #{ conference.name }!"
         end
       end
     end
@@ -61,7 +69,7 @@ end
 run RubyConf::Application.new
 
 # GET (text) /confs/pt
-# 200 "Hello, Ruby Conf PT!"
+# 200 "Olá, RubyConf PT!"
 #
 # GET (html) /confs/pt
-# 200 "<h1>Hello, Ruby Conf PT!</h1>"
+# 200 "<h1>Olá, RubyConf PT!</h1>"

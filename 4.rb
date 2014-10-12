@@ -33,4 +33,7 @@ run Lotus::Router.new {
 }
 
 # GET /confs/pt
-# 200 "Hello, Ruby Conf PT!"
+# 200 "Hello, RubyConf PT!"
+
+# GET /confs/it
+# 200 "Hello, RubyDay!"

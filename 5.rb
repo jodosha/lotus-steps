@@ -19,7 +19,7 @@ class ConferenceRepository
 end
 
 Lotus::Model.configure do
-  adapter :local, 'postgres://localhost/conferences'
+  adapter :sql, 'postgres://localhost/conferences'
 
   mapping do
     collection :conferences do
@@ -27,7 +27,7 @@ Lotus::Model.configure do
       repository ConferenceRepository
 
       attribute :id,      Integer
-      attribute :country, String
+      attribute :country, String, as: :country_code
       attribute :name,    String
     end
   end
@@ -49,4 +49,4 @@ run Lotus::Router.new {
 }
 
 # GET /confs/pt
-# 200 "Hello, Ruby Conf PT!"
+# 200 "Hello, RubyConf PT!"
