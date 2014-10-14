@@ -4,7 +4,7 @@ run Lotus::Router.new {
   get '/confs/:country', to:
     ->(env) {
     [200, {},
-     ["Hello, RubyConf #{ env['router.params'][:country].upcase }!"]]
+      ["Hello, RubyConf #{ env['router.params'][:country].upcase }!"]]
   }
 }
 

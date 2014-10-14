@@ -5,6 +5,10 @@ require_relative './app/repositories/conference_repository'
 module RubyConf
   class Application < Lotus::Application
     configure do
+      # Routes are available at:
+      #
+      #   RubyConf::Application.new.routes.path(:home)
+      #   RubyConf::Routes.path(:home)
       routes do
         get '/confs/:country', to: 'conferences#show'
       end
