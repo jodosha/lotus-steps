@@ -1,3 +1,5 @@
+require 'i18n'
+require 'json'
 require 'lotus'
 require_relative './app/entities/conference'
 require_relative './app/repositories/conference_repository'
@@ -59,11 +61,19 @@ module RubyConf
         end
       end
 
-      class TextShow < Show
-        format :text
+      class JsonShow < Show
+        format :json
 
         def render
+          JSON.generate(serialized_conference)
           "#{ greeting }, #{ conference.name }!"
+        end
+
+        private
+        def serialized_conference
+          conference.to_h.merge(
+            'greeting' => greeting
+          )
         end
       end
     end
@@ -76,4 +86,7 @@ run RubyConf::Application.new
 # 200 "Olá, RubyConf PT!"
 #
 # GET (html) /confs/pt
-# 200 "<h1>Olá, RubyConf PT!</h1>"
+# 200 <h1>Olá, RubyConf PT!</h1>
+#
+# GET (json) /confs/pt
+# 200 {"id":"1","name":"RubyConf PT", "country":"pt", "greeting":"..."}

@@ -3,7 +3,8 @@ require 'lotus/controller'
 
 Conference = Struct.new(:country, :name) do
   def initialize(attributes = {})
-    @country, @name = attributes.values_at(:country, :name)
+    self.country, self.name =
+       attributes.values_at(:country, :name)
   end
 end
 

@@ -4,7 +4,8 @@ require 'lotus/model'
 
 Conference = Struct.new(:id, :country, :name) do
   def initialize(attributes = {})
-    @id, @country, @name = attributes.values_at(:id, :country, :name)
+    self.id, self.country, self.name =
+       attributes.values_at(:id, :country, :name)
   end
 end
 
