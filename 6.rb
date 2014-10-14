@@ -65,13 +65,11 @@ module RubyConf
         format :json
 
         def render
-          JSON.generate(serialized_conference)
-          "#{ greeting }, #{ conference.name }!"
+          JSON.generate(conference)
         end
 
-        private
-        def serialized_conference
-          conference.to_h.merge(
+        def conference
+          super.to_h.merge(
             greeting: greeting
           )
         end
