@@ -72,7 +72,7 @@ module RubyConf
         private
         def serialized_conference
           conference.to_h.merge(
-            'greeting' => greeting
+            greeting: greeting
           )
         end
       end
